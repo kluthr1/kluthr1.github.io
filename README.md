@@ -13,7 +13,7 @@ pnpm dev
 
 ## Deploy to GitHub Pages
 
-Pushing to `main` runs the workflow in `.github/workflows/pages.yml` and publishes the static export at <https://kluthr1.github.io/website_temp/>. GitHub Pages must use **GitHub Actions** as its deployment source under **Settings → Pages**.
+Pushing to `main` runs the workflow in `.github/workflows/pages.yml` and publishes the static export at <https://kluthr1.github.io/>. GitHub Pages must use **GitHub Actions** as its deployment source under **Settings → Pages**.
 
 ## Edit content
 
