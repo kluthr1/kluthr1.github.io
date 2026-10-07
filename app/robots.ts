@@ -1,2 +1,4 @@
 import type { MetadataRoute } from "next";
-export default function robots(): MetadataRoute.Robots { return { rules: { userAgent: "*", allow: "/" }, sitemap: "https://kluthria.us/sitemap.xml" }; }
+export const dynamic = "force-static";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://kluthria.us").replace(/\/$/, "");
+export default function robots(): MetadataRoute.Robots { return { rules: { userAgent: "*", allow: "/" }, sitemap: `${siteUrl}/sitemap.xml` }; }

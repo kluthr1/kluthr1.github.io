@@ -11,6 +11,10 @@ pnpm dev
 
 `pnpm build` checks types and generates the production pages.
 
+## Deploy to GitHub Pages
+
+Pushing to `main` runs the workflow in `.github/workflows/pages.yml` and publishes the static export at <https://kluthr1.github.io/website_temp/>. GitHub Pages must use **GitHub Actions** as its deployment source under **Settings → Pages**.
+
 ## Edit content
 
 Research projects and publication records live in [`lib/content.ts`](lib/content.ts). A project's optional `figure` field accepts a local image URL such as `/figures/melanoma.webp` (stored under `public/figures`), intrinsic `width` and `height`, alt text, and a caption. Next.js optimizes supplied figure images in the cards. Set `originalSrc` to a high-resolution export for the lightbox; use WebP or AVIF for the card image.
