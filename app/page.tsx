@@ -2,9 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer, Header } from "@/components/SiteChrome";
 import { ORCID, publications } from "@/lib/content";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
+  const profileStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      name: "Karan Luthria",
+      url: "https://kluthria.us/",
+      image: "https://kluthria.us/images/karan-profile.jpg",
+      description: "MD-PhD student at Columbia University in the Izar Laboratory studying cancer evolution, metastatic progression, and tumor ecosystems.",
+      affiliation: { "@type": "Organization", name: "Columbia University" },
+      sameAs: [ORCID],
+    },
+  };
+
   return <div id="top"><Header/><main>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileStructuredData).replace(/</g, "\\u003c") }} />
     <section className="hero container" aria-labelledby="hero-title">
       <div className="hero-grid"><div className="hero-copy">
         <p className="eyebrow hero-kicker"><span className="small-rule"/> <a href="https://www.columbia.edu/" target="_blank" rel="noopener noreferrer">Columbia University</a> · Izar laboratory</p>
@@ -16,7 +36,7 @@ export default function Home() {
       <div className="hero-bottom"><span>MD-PhD training</span><span>Columbia University · New York</span></div>
     </section>
 
-    <section className="about-section"><div className="container about-grid"><div className="about-heading"><p className="eyebrow about-label">About me</p><figure className="about-photo"><Image src="/images/karan-profile.jpg" alt="Karan hiking in the mountains" width={4032} height={3024} sizes="(max-width: 760px) 100vw, 34vw"/></figure><figure className="about-photo about-kayak"><Image src="/images/karan-kayaking.jpg" alt="Karan kayaking beside seals" width={1536} height={2048} sizes="(max-width: 760px) 100vw, 34vw"/></figure></div><div className="about-copy"><p className="about-lead">I am an MD-PhD student at Columbia University in the Izar Laboratory.</p><p>My research asks how cancers evolve, acquire metastatic potential, and interact with the cells and tissues around them. I develop computational models and multimodal approaches for studying melanoma, sarcoma, and metastatic disease, with an emphasis on questions that require connecting genomic, transcriptomic, spatial, and clinical observations.</p><p>This work is motivated by a practical challenge: patient tumors are complex and change over time, while any single measurement captures only part of that biology. My goal is to build and apply methods that make those measurements more interpretable and help generate testable hypotheses about progression and treatment response.</p><p>Before medical school, I studied computer science at the University of Maryland, Baltimore County (UMBC). I was named to <a href="https://top.mlh.com/2021/profiles/karan-luthria" target="_blank" rel="noopener noreferrer">MLH’s Top 50 Hackers ↗</a> and received a Goldwater Scholarship for work using deep learning to improve drug-repurposing models.</p><p className="about-interests">Away from research, I play tennis, hike, and spend time in the mountains. I enjoy trying new restaurants and am a Yelp Elite reviewer, and I’m perfecting my chai-making process. I’m a Washington Wizards fan and make sure to watch each game (shoutout AJ Dybantsa); my fantasy football team, meanwhile, keeps losing each Sunday.</p><Link href="/research" className="text-link">Research overview ↗</Link></div></div></section>
+    <section className="about-section"><div className="container about-grid"><div className="about-heading"><p className="eyebrow about-label">About me</p><figure className="about-photo"><Image src="/images/karan-profile.jpg" alt="Karan hiking in the mountains" width={4032} height={3024} sizes="(max-width: 760px) 100vw, 34vw"/></figure><figure className="about-photo about-kayak"><Image src="/images/karan-kayaking-cropped.jpg" alt="Karan kayaking beside seals" width={1536} height={1948} sizes="(max-width: 760px) 100vw, 34vw"/></figure></div><div className="about-copy"><p className="about-lead">I am an MD-PhD student at Columbia University in the Izar Laboratory.</p><p>My research asks how cancers evolve, acquire metastatic potential, and interact with the cells and tissues around them. I develop computational models and multimodal approaches for studying melanoma, sarcoma, and metastatic disease, with an emphasis on questions that require connecting genomic, transcriptomic, spatial, and clinical observations.</p><p>This work is motivated by a practical challenge: patient tumors are complex and change over time, while any single measurement captures only part of that biology. My goal is to build and apply methods that make those measurements more interpretable and help generate testable hypotheses about progression and treatment response.</p><p>Before medical school, I studied computer science at the University of Maryland, Baltimore County (UMBC). I was named to <a href="https://top.mlh.com/2021/profiles/karan-luthria" target="_blank" rel="noopener noreferrer">MLH’s Top 50 Hackers ↗</a> and received a Goldwater Scholarship for work using deep learning to improve drug-repurposing models.</p><p className="about-interests">Away from research, I play tennis, hike, and spend time in the mountains. I enjoy trying new restaurants and am a Yelp Elite reviewer, and I’m perfecting my chai-making process. I’m a Washington Wizards fan and make sure to watch each game (shoutout AJ Dybantsa); my fantasy football team, meanwhile, keeps losing each Sunday.</p><Link href="/research" className="text-link">Research overview ↗</Link></div></div></section>
 
     <section className="timeline-section"><div className="container"><div className="timeline-header"><h2>Recent Updates</h2></div><ul className="recent-updates">
       <li><span className="update-year">2026</span><div><p><a href={publications[0].href} target="_blank" rel="noopener noreferrer"><strong>Released a co-first-author preprint on bioRxiv</strong> · <em>Genomic correlates of metastatic competence and progression in human melanoma</em> ↗</a></p><p className="update-detail">The study examines genomic features associated with metastatic competence and reconstructs melanoma evolution from primary tumors to distant disease.</p></div></li>

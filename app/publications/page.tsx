@@ -5,6 +5,7 @@ import { publications } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Publications",
   description: "Publications and preprints by Karan Luthria.",
+  alternates: { canonical: "/publications/" },
 };
 
 function AuthorLine({ authors }: { authors: string }) {

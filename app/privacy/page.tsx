@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Privacy",
   description: "Information about analytics collected on Karan Luthria’s website.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/privacy/" },
 };
 
 export default function PrivacyPage() {

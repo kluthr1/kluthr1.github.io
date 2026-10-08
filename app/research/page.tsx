@@ -6,6 +6,7 @@ import { projects, publications } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Research",
   description: "Selected research in cancer evolution, tumor ecosystems, and multimodal methods.",
+  alternates: { canonical: "/research/" },
 };
 
 export default function ResearchPage() {
