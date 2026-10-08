@@ -3,7 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-type TrackedEvent = { type: "page_view" | "engagement" | "click"; path: string; target?: string; seconds?: number; referrer?: string };
+type TrackedEvent = { type: "page_view" | "engagement" | "click"; path: string; target?: string; seconds?: number; referrer?: string; source?: string };
+
 function send(event: TrackedEvent, beacon = false) {
   const body = JSON.stringify(event);
   if (beacon && navigator.sendBeacon) {
@@ -13,6 +14,16 @@ function send(event: TrackedEvent, beacon = false) {
   void fetch("/api/visit", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
 }
 
+function sourceFromReferrer(referrer: string): string | undefined {
+  try {
+    const host = new URL(referrer).hostname.toLowerCase().replace(/^www\./, "");
+    if (host === "x.com" || host.endsWith(".x.com") || host === "twitter.com" || host.endsWith(".twitter.com")) return "twitter";
+    if (host === "github.com" || host.endsWith(".github.com")) return "github";
+    if (host === "linkedin.com" || host.endsWith(".linkedin.com") || host === "lnkd.in") return "linkedin";
+  } catch { return undefined; }
+  return undefined;
+}
+
 export function VisitTracker() {
   const pathname = usePathname();
   useEffect(() => {
@@ -20,13 +31,17 @@ export function VisitTracker() {
     const started = Date.now();
     const path = pathname || "/";
     if (path.startsWith("/admin")) return;
-    send({ type: "page_view", path, referrer: document.referrer });
+    const querySource = new URLSearchParams(window.location.search).get("utm_source")?.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+    let source = querySource || sessionStorage.getItem("kluthria_traffic_source") || sourceFromReferrer(document.referrer);
+    if (querySource) sessionStorage.setItem("kluthria_traffic_source", querySource);
+    else if (source && !sessionStorage.getItem("kluthria_traffic_source")) sessionStorage.setItem("kluthria_traffic_source", source);
+    send({ type: "page_view", path, referrer: document.referrer, source });
     let engagementSent = false;
     const recordEngagement = () => {
       if (engagementSent) return;
       engagementSent = true;
       const seconds = Math.round((Date.now() - started) / 1000);
-      if (seconds >= 5) send({ type: "engagement", path, seconds }, true);
+      if (seconds >= 5) send({ type: "engagement", path, seconds, source }, true);
     };
     const recordClick = (event: MouseEvent) => {
       const link = (event.target as Element | null)?.closest("a[href]");
@@ -38,7 +53,7 @@ export function VisitTracker() {
         const url = new URL(href, window.location.origin);
         target = url.origin === window.location.origin ? url.pathname : url.origin;
       } catch { return; }
-      send({ type: "click", path, target });
+      send({ type: "click", path, target, source });
     };
     window.addEventListener("pagehide", recordEngagement, { once: true });
     document.addEventListener("click", recordClick);

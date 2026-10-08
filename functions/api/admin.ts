@@ -15,9 +15,20 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
   for (let i = 0; i < token.length; i += 1) diff |= token.charCodeAt(i) ^ env.ADMIN_TOKEN.charCodeAt(i);
   if (diff !== 0) return new Response("Unauthorized", { status: 401, headers: { "Cache-Control": "no-store" } });
   const limit = Math.min(1000, Math.max(1, Number(new URL(request.url).searchParams.get("limit")) || 500));
-  const { results } = await env.DB.prepare(`
-    SELECT event_type, path, target, seconds, occurred_at, ip_address, country, region, city, asn, network, user_agent, referrer
-    FROM visits ORDER BY occurred_at DESC LIMIT ?
-  `).bind(limit).all<Row>();
+  let results: Row[];
+  try {
+    ({ results } = await env.DB.prepare(`
+      SELECT event_type, path, target, seconds, occurred_at, ip_address, country, region, city, asn, network, user_agent, referrer, source
+      FROM visits ORDER BY occurred_at DESC LIMIT ?
+    `).bind(limit).all<Row>());
+  } catch (error) {
+    const message = String(error).toLowerCase();
+    if (!message.includes("source") || !(message.includes("no such column") || message.includes("has no column named"))) throw error;
+    ({ results } = await env.DB.prepare(`
+      SELECT event_type, path, target, seconds, occurred_at, ip_address, country, region, city, asn, network, user_agent, referrer
+      FROM visits ORDER BY occurred_at DESC LIMIT ?
+    `).bind(limit).all<Row>());
+    results = results.map((row) => ({ ...row, source: null }));
+  }
   return Response.json(results, { headers: { "Cache-Control": "no-store, private", "X-Content-Type-Options": "nosniff" } });
 }

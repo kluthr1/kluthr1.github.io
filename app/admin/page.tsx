@@ -5,9 +5,9 @@ import { useState } from "react";
 type Visit = {
   event_type: string; path: string; target: string | null; seconds: number | null; occurred_at: string;
   ip_address: string | null; country: string | null; region: string | null; city: string | null;
-  asn: number | null; network: string | null; user_agent: string | null; referrer: string | null;
+  asn: number | null; network: string | null; user_agent: string | null; referrer: string | null; source: string | null;
 };
-const columns: (keyof Visit)[] = ["occurred_at", "event_type", "path", "target", "ip_address", "country", "region", "city", "network", "user_agent", "referrer", "seconds"];
+const columns: (keyof Visit)[] = ["occurred_at", "event_type", "source", "path", "target", "ip_address", "country", "region", "city", "network", "user_agent", "referrer", "seconds"];
 const csvCell = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
 
 export default function AdminPage() {
