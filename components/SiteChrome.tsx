@@ -10,5 +10,5 @@ export function Header() {
 }
 
 export function Footer() {
-  return <footer className="site-footer"><div className="container footer-inner"><div><span className="eyebrow">Karan Luthria</span></div><div className="footer-links"><a href={ORCID} target="_blank" rel="noopener noreferrer">ORCID ↗</a><a href="/privacy/">Privacy</a><a href="#top">Back to top ↑</a></div><span className="copyright">© {new Date().getFullYear()} Karan Luthria</span></div></footer>;
+  return <footer className="site-footer"><div className="container footer-inner"><div><span className="eyebrow">Karan Luthria</span></div><div className="footer-links"><a href={ORCID} target="_blank" rel="noopener noreferrer">ORCID ↗</a><a href="#top">Back to top ↑</a></div><span className="copyright">© {new Date().getFullYear()} Karan Luthria</span></div></footer>;
 }
