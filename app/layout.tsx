@@ -17,8 +17,9 @@ export const metadata: Metadata = {
     title: "Karan Luthria | Computational Oncology",
     description: "Computational models and multimodal approaches for understanding how human tumors evolve, metastasize, and respond to therapy.",
     url: siteUrl,
+    images: [{ url: "/images/karan-profile-social.jpg", width: 4032, height: 3024, alt: "Karan Luthria hiking in the Canadian Rockies" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["/images/karan-profile-social.jpg"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
