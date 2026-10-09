@@ -7,7 +7,7 @@ interface Env { DB: VisitDatabase; ADMIN_TOKEN: string; }
 type Row = Record<string, string | number | null>;
 
 export async function onRequestGet({ request, env }: { request: Request; env: Env }): Promise<Response> {
-  if (new URL(request.url).hostname.toLowerCase() !== "kluthria.us") return new Response("Not found", { status: 404 });
+  if (new URL(request.url).hostname.toLowerCase() !== "kluthria.org") return new Response("Not found", { status: 404 });
   const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   if (!env.ADMIN_TOKEN || !token || token.length !== env.ADMIN_TOKEN.length) {
     return new Response("Unauthorized", { status: 401, headers: { "Cache-Control": "no-store" } });

@@ -29,7 +29,7 @@ function safeReferer(value: string | null): string | null {
 
 export async function onRequestPost({ request, env }: { request: Request; env: Env }): Promise<Response> {
   const hostname = new URL(request.url).hostname.toLowerCase();
-  if (hostname !== "kluthria.us") return new Response(null, { status: 404 });
+  if (hostname !== "kluthria.org") return new Response(null, { status: 404 });
   if (request.headers.get("content-type")?.split(";")[0] !== "application/json") return new Response(null, { status: 415 });
   let event: VisitEvent;
   try { event = await request.json() as VisitEvent; } catch { return new Response(null, { status: 400 }); }

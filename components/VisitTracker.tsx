@@ -29,7 +29,7 @@ export function VisitTracker() {
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_ENABLE_VISIT_LOG !== "true") return;
     // The portfolio uses the apex domain; never send events from NAS subdomains.
-    if (window.location.hostname.toLowerCase() !== "kluthria.us") return;
+    if (window.location.hostname.toLowerCase() !== "kluthria.org") return;
     const started = Date.now();
     const path = pathname || "/";
     if (path.startsWith("/admin")) return;

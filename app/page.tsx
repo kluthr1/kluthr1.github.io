@@ -15,8 +15,8 @@ export default function Home() {
     mainEntity: {
       "@type": "Person",
       name: "Karan Luthria",
-      url: "https://kluthria.us/",
-      image: "https://kluthria.us/images/karan-profile-social.jpg",
+      url: "https://kluthria.org/",
+      image: "https://kluthria.org/images/karan-profile-social.jpg",
       description: "MD-PhD student at Columbia University in the Izar Laboratory studying cancer evolution, metastatic progression, and tumor ecosystems.",
       affiliation: { "@type": "Organization", name: "Columbia University" },
       sameAs: [ORCID],
