@@ -3,7 +3,7 @@ import { DM_Sans, Cormorant_Garamond } from "next/font/google";
 import { VisitTracker } from "@/components/VisitTracker";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kluthria.org";
+const siteUrl = "https://kluthria.org";
 const sans = DM_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const serif = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-serif", weight: ["400", "500", "600"], display: "swap" });
 

@@ -5,7 +5,7 @@ The site remains in the GitHub repository as source. Cloudflare Pages serves the
 ## Connect the site
 
 1. In Cloudflare, open **Workers & Pages → Create → Pages → Connect to Git** and select `kluthr1/kluthr1.github.io`.
-2. Use the repository root as the project root, `pnpm install --frozen-lockfile && pnpm build` as the build command, and `out` as the build output directory. Set `NEXT_PUBLIC_SITE_URL` to `https://kluthria.org`. Leave `NEXT_PUBLIC_ENABLE_VISIT_LOG` unset for the initial deploy.
+2. Use the repository root as the project root, `pnpm install --frozen-lockfile && pnpm build` as the build command, and `out` as the build output directory. Remove any `NEXT_PUBLIC_SITE_URL` build variable; the canonical domain is set to `https://kluthria.org` in the site. Leave `NEXT_PUBLIC_ENABLE_VISIT_LOG` unset for the initial deploy.
 3. Create a D1 database named `kluthria-visit-log`. In its SQL console, run `cloudflare/schema.sql`.
 4. In the Pages project's **Settings → Functions → D1 database bindings**, add binding `DB` and select that database. Add a production secret named `ADMIN_TOKEN` with a long, randomly generated value. Save and redeploy after adding bindings/secrets.
 5. Under **Custom domains**, add `kluthria.org`. If Cloudflare asks you to change nameservers, do that at the registrar where the domain was purchased. Keep any existing email-related DNS records when moving nameservers.
