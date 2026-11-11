@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Sans, Cormorant_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import { VisitTracker } from "@/components/VisitTracker";
 import "./globals.css";
 
 const siteUrl = "https://kluthria.org";
-const sans = DM_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const serif = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-serif", weight: ["400", "500", "600"], display: "swap" });
+const sans = localFont({ src: "../public/fonts/dm-sans-latin.woff2", variable: "--font-sans", display: "swap", weight: "100 1000" });
+const serif = localFont({ src: "../public/fonts/cormorant-garamond-latin.woff2", variable: "--font-serif", display: "swap", weight: "300 700" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
