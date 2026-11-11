@@ -28,6 +28,16 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: "cancer-dormancy-review",
+    title: "Immune evasion in cancer dormancy and metastatic reactivation",
+    authors: "Gejman RS, Ling HH, Efe G, Luthria K, Shah P, Izar B.",
+    journal: "Trends in Cancer",
+    year: 2026,
+    href: "https://doi.org/10.1016/j.trecan.2026.10.008",
+    label: "Co-author · Review",
+    visual: "evolution",
+  },
+  {
     id: "melanoma",
     title: "Genomic correlates of metastatic competence and progression in human melanoma",
     authors: "Chatziioannou E, Luthria K, Shah P, et al.",
@@ -112,8 +122,9 @@ export const projects: Project[] = [
       "This work examines genomic changes in primary melanomas and matched metastases from patients who later relapsed.",
       "The preprint reports a six-gene copy-number signature associated with relapse and continued copy-number evolution in metastatic samples.",
       "Clonal reconstruction and spatial measurements were used to examine seeding patterns and the organization of metastatic subclones.",
+      "A co-authored Trends in Cancer review examines how immune evasion supports cancer-cell dormancy and metastatic reactivation.",
     ],
-    relatedPublicationIds: ["melanoma", "brain-mets"],
+    relatedPublicationIds: ["cancer-dormancy-review", "melanoma", "brain-mets"],
     visual: "evolution",
   },
   {
